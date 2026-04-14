@@ -1,0 +1,28 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Furniture Products</h1>
+
+{% if products %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Material</th>
+        <th>Price (£)</th>
+        <th>Description</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.material }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.description }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No furniture products have been added yet.</p>
+{% endif %}
+{% endblock %}
