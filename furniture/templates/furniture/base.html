@@ -1,18 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Bespoke Furniture</title>
+    <link rel="stylesheet" href="{% static 'furniture/style.css' %}">
 </head>
 <body>
     <nav>
-        <a href="/">Home</a> |
-        <a href="/create/">Create Furniture</a> |
-        <a href="/list/">Furniture List</a> |
-        <a href="/products/">Furniture Products</a>
+        <div class="nav-container">
+            <h2>Bespoke Furniture</h2>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/create/">Create Furniture</a>
+                <a href="/list/">Custom Orders</a>
+                <a href="/products/">Furniture Products</a>
+            </div>
+        </div>
     </nav>
-    <hr>
 
-    {% block content %}
-    {% endblock %}
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 </html>

@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f5f1;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+nav {
+    background-color: #5c4033;
+    padding: 15px 30px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-container h2 {
+    color: white;
+    margin: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 85%;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #5c4033;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+table th {
+    background-color: #5c4033;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+button {
+    background-color: #5c4033;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #7a5643;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+p {
+    line-height: 1.6;
+}
+
+td {
+    vertical-align: top;
+}
+
+h1 + p {
+    margin-bottom: 20px;
+}
+
+td a {
+    color: #5c4033;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+form {
+    margin-bottom: 25px;
+}
+
+form button {
+    margin-top: 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+select {
+    background-color: white;
+}
+
+table {
+    margin-top: 25px;
+}

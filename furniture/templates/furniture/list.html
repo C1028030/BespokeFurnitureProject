@@ -2,17 +2,48 @@
 
 {% block content %}
 <h1>Custom Furniture Orders</h1>
+<p>Below are the bespoke furniture requests submitted by customers.</p>
+
+<form method="GET">
+    <p>
+        <label for="search">Search by customer name:</label>
+        <input type="text" name="search" id="search" value="{{ search_query }}">
+    </p>
+
+    <p>
+        <label for="furniture_type">Filter by furniture type:</label>
+        <select name="furniture_type" id="furniture_type">
+            <option value="">All Furniture Types</option>
+            {% for type in furniture_types %}
+                <option value="{{ type }}" {% if type == selected_furniture_type %}selected{% endif %}>{{ type }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <label for="material">Filter by material:</label>
+        <select name="material" id="material">
+            <option value="">All Materials</option>
+            {% for mat in materials %}
+                <option value="{{ mat }}" {% if mat == selected_material %}selected{% endif %}>{{ mat }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <button type="submit">Apply Filters</button>
+</form>
 
 {% if orders %}
-<table border="1" cellpadding="10">
+<table>
     <tr>
-        <th>Customer Name</th>
+        <th>Customer</th>
         <th>Email</th>
         <th>Furniture Type</th>
         <th>Dimensions</th>
         <th>Material</th>
         <th>Requirements</th>
-        <th>Submitted</th>
+        <th>Date Submitted</th>
+        <th>Actions</th>
     </tr>
     {% for order in orders %}
     <tr>
@@ -22,11 +53,15 @@
         <td>{{ order.dimensions }}</td>
         <td>{{ order.material }}</td>
         <td>{{ order.requirements }}</td>
-        <td>{{ order.created_at }}</td>
+        <td>{{ order.created_at|date:"d M Y, H:i" }}</td>
+        <td>
+            <a href="{% url 'edit_order' order.id %}">Edit</a> |
+            <a href="{% url 'delete_order' order.id %}">Delete</a>
+        </td>
     </tr>
     {% endfor %}
 </table>
 {% else %}
-<p>No custom orders have been submitted yet.</p>
+<p>No custom furniture orders match your search or filters.</p>
 {% endif %}
 {% endblock %}

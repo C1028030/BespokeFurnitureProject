@@ -1,0 +1,12 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Edit Custom Order</h1>
+<p>Update the details for this furniture request.</p>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+</form>
+{% endblock %}

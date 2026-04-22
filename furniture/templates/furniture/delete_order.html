@@ -1,0 +1,11 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Delete Custom Order</h1>
+<p>Are you sure you want to delete the order for <strong>{{ order.customer_name }}</strong>?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Confirm Delete</button>
+</form>
+{% endblock %}
