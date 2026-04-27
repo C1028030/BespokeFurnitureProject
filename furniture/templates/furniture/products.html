@@ -41,6 +41,8 @@
         <th>Material</th>
         <th>Price (£)</th>
         <th>Description</th>
+        <th>Action</th>
+        <th>Image</th>
     </tr>
     {% for product in products %}
     <tr>
@@ -49,6 +51,20 @@
         <td>{{ product.material }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.description }}</td>
+
+        <!-- New button/link column -->
+         <td>
+            <a href="{% url 'product_detail' product.id %}">View Details</a>
+         </td>
+
+         <!-- Image -->
+          <td>
+            {% if product.image %}
+                <img src="{{ product.image.url }}" width="100">
+            {% else %}
+                No image
+            {% endif %}
+          </td>
     </tr>
     {% endfor %}
 </table>

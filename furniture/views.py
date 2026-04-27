@@ -1,9 +1,30 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomOrderForm
 from .models import CustomOrder, Furniture
+from django.contrib.auth.decorators import login_required # Used to stop non-logged in users from accessing staff pages
 
 def home(request):
-    return render(request, 'furniture/home.html')
+    # Counts all custom orders in the database
+    total_orders = CustomOrder.objects.count()
+
+    # Counts orders that are still pending
+    pending_orders = CustomOrder.objects.filter(status='Pending').count()
+
+    # Counts orders marked as completed
+    completed_orders = CustomOrder.objects.filter(status='Completed').count()
+
+    # Counts all furniture products in the catalogue
+    total_products = Furniture.objects.count()
+
+    # Sends the dashboard numbers to home.html
+    context = {
+        'total_orders': total_orders,
+        'pending_orders': pending_orders,
+        'completed_orders': completed_orders,
+        'total_products': total_products,
+    }
+
+    return render(request, 'furniture/home.html', context)
 
 def create_furniture(request):
     if request.method == 'POST':
@@ -18,6 +39,7 @@ def create_furniture(request):
 
     return render(request, 'furniture/create.html', {'form': form})
 
+@login_required
 def furniture_list(request):
     orders = CustomOrder.objects.all().order_by('-created_at')
 
@@ -78,6 +100,7 @@ def product_list(request):
 
     return render(request, 'furniture/products.html', context)
 
+@login_required
 def edit_order(request, order_id):
     order = get_object_or_404(CustomOrder, id=order_id)
 
@@ -91,7 +114,7 @@ def edit_order(request, order_id):
 
     return render(request, 'furniture/edit_order.html', {'form': form, 'order': order})
 
-
+@login_required
 def delete_order(request, order_id):
     order = get_object_or_404(CustomOrder, id=order_id)
 
@@ -101,3 +124,19 @@ def delete_order(request, order_id):
 
     return render(request, 'furniture/delete_order.html', {'order': order})
 
+def product_detail(request, product_id):
+    # Finds one furniture product by its ID.
+    # If the product doesn't exist, Django will show a 404 error page
+    product = get_object_or_404(Furniture, id=product_id)
+
+    # Sends the selected product to the product_detail.html template.
+    return render(request, 'furniture/product_detail.html', {'product': product})
+
+@login_required
+def order_detail(request, order_id):
+    # Finds one custom order by its ID.
+    # If it doesn't exist, Django shows a 404 page
+    order = get_object_or_404(CustomOrder, id=order_id)
+
+    # Sends the order to the detail template.
+    return render(request, 'furniture/order_detail.html', {'order': order})

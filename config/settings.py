@@ -116,3 +116,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+import os
+
+# URL path used in browser
+MEDIA_URL = '/media/'
+
+# Physical folder where images are stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Where Django sends users if they try to access a protected page
+LOGIN_URL = '/admin/login/'
+
+# Where users go after logging in successfully
+LOGIN_REDIRECT_URL = '/list/'

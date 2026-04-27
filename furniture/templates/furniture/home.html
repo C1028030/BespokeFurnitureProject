@@ -1,6 +1,58 @@
 {% extends 'furniture/base.html' %}
 
 {% block content %}
-<h1>Bespoke Furniture Homepage</h1>
-<p>Your custom furniture ordering system starts here.</p>
+<section class="hero">
+    <h1>Custom Furniture Made for Your Space</h1>
+    <p>
+        Design bespoke furniture tailored to your room, style, material choice, and measurements.
+    </p>
+
+    <div class="hero-buttons">
+        <a class="button-link" href="/create/">Create Custom Order</a>
+        <a class="button-link secondary" href="/products/">View Products</a>
+    </div>
+</section>
+
+<section class="dashboard-stats">
+    <!-- Dashboard card showing total number of custom orders -->
+    <div class="stat-card">
+        <h2>{{ total_orders }}</h2>
+        <p>Total Orders</p>
+    </div>
+
+    <!-- Dashboard card showing orders waiting to be reviewed -->
+    <div class="stat-card">
+        <h2>{{ pending_orders }}</h2>
+        <p>Pending Orders</p>
+    </div>
+
+    <!-- Dashboard card showing finished orders -->
+    <div class="stat-card">
+        <h2>{{ completed_orders }}</h2>
+        <p>Completed Orders</p>
+    </div>
+
+    <!-- Dashboard card showing total furniture products -->
+    <div class="stat-card">
+        <h2>{{ total_products }}</h2>
+        <p>Products Available</p>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <h2>Custom Orders</h2>
+        <p>Customers can submit furniture requests with dimensions, material preferences, and requirements.</p>
+    </div>
+
+    <div class="feature-card">
+        <h2>Product Catalogue</h2>
+        <p>Browse available furniture products and filter them by category, material, or name.</p>
+    </div>
+
+    <div class="feature-card">
+        <h2>Order Management</h2>
+        <p>Staff can view, edit, search, filter, and delete customer furniture requests.</p>
+    </div>
+</section>
 {% endblock %}

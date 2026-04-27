@@ -1,0 +1,20 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Order Details</h1>
+
+<!-- Shows full details for one customer order -->
+<p><strong>Customer:</strong> {{ order.customer_name }}</p>
+<p><strong>Email:</strong> {{ order.email }}</p>
+<p><strong>Furniture Type:</strong> {{ order.furniture_type }}</p>
+<p><strong>Dimensions:</strong> {{ order.dimensions }}</p>
+<p><strong>Material:</strong> {{ order.material }}</p>
+<p><strong>Requirements:</strong> {{ order.requirements }}</p>
+<p><strong>Status:</strong> {{ order.status }}</p>
+<p><strong>Submitted:</strong> {{ order.created_at|date:"d M Y, H:i" }}</p>
+
+<!-- Navigation buttons -->
+<a class="button-link" href="{% url 'list' %}">Back to Orders</a>
+<a class="button-link secondary" href="{% url 'edit_order' order.id %}">Edit Order</a>
+<a class="button-link danger" href="{% url 'delete_order' order.id %}">Delete Order</a>
+{% endblock %}

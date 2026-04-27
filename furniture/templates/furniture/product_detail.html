@@ -1,0 +1,19 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+
+<!-- Shows the main details for one furniture product -->
+<p><strong>Category:</strong> {{ product.category }}</p>
+<p><strong>Material:</strong> {{ product.material }}</p>
+<p><strong>Price:</strong> £{{ product.price }}</p>
+<p><strong>Description:</strong> {{ product.description }}</p>
+
+<!-- Sends the user back to the full product catalogue -->
+<a class="button-link" href="/products/">Back to Products</a>
+
+{% if product.image %}
+    <img src="{{ product.image.url }}" width="300">
+{% endif %}
+
+{% endblock %}

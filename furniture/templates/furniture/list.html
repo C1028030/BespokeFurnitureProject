@@ -44,6 +44,7 @@
         <th>Requirements</th>
         <th>Date Submitted</th>
         <th>Actions</th>
+        <th>Status</th>
     </tr>
     {% for order in orders %}
     <tr>
@@ -55,8 +56,13 @@
         <td>{{ order.requirements }}</td>
         <td>{{ order.created_at|date:"d M Y, H:i" }}</td>
         <td>
-            <a href="{% url 'edit_order' order.id %}">Edit</a> |
-            <a href="{% url 'delete_order' order.id %}">Delete</a>
+            <a href="{% url 'order_detail' order.id %}">View</a>
+        </td>
+        <td>
+            <!-- Adds a CSS class based on the order status -->
+             <span class="status-badge status-{{ order.status|slugify}}">
+                {{ order.status }}
+             </span>
         </td>
     </tr>
     {% endfor %}

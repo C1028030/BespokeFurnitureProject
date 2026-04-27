@@ -10,5 +10,6 @@ class CustomOrderForm(forms.ModelForm):
             'furniture_type',
             'dimensions',
             'material',
-            'requirements'
+            'requirements',
+            'status'
         ]
