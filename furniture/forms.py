@@ -1,7 +1,8 @@
 from django import forms
 from .models import CustomOrder
 
-class CustomOrderForm(forms.ModelForm):
+# Form used by customers (no status field)
+class CustomOrderCreateForm(forms.ModelForm):
     class Meta:
         model = CustomOrder
         fields = [
@@ -11,5 +12,10 @@ class CustomOrderForm(forms.ModelForm):
             'dimensions',
             'material',
             'requirements',
-            'status'
         ]
+
+# Form used by staff (includes status)
+class CustomOrderUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CustomOrder
+        fields = '__all__'

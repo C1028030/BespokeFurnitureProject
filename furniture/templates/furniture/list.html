@@ -30,6 +30,19 @@
         </select>
     </p>
 
+    <p>
+    <!-- Lets staff filter orders by current progress status -->
+    <label for="status">Filter by status:</label>
+    <select name="status" id="status">
+        <option value="">All Statuses</option>
+        {% for stat in statuses %}
+            <option value="{{ stat }}" {% if stat == selected_status %}selected{% endif %}>
+                {{ stat }}
+            </option>
+        {% endfor %}
+    </select>
+    </p>
+
     <button type="submit">Apply Filters</button>
 </form>
 

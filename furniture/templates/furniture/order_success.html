@@ -1,0 +1,26 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Order Submitted Successfully</h1>
+
+<p>
+    Thank you for your custom furniture request.
+</p>
+
+<p>
+    <!-- Displays the unique order ID -->
+    Your reference number is:
+    <strong>#{{ order.id }}</strong>
+</p>
+
+<p><strong>Furniture Type:</strong> {{ order.furniture_type }}</p>
+<p><strong>Material:</strong> {{ order.material }}</p>
+
+<p>
+    We will review your request and contact you shortly.
+</p>
+
+<!-- Navigation options -->
+<a class="button-link" href="{% url 'home' %}">Back to Home</a>
+<a class="button-link secondary" href="{% url 'products' %}">View Products</a>
+{% endblock %}

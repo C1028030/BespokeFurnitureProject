@@ -15,25 +15,25 @@
 
 <section class="dashboard-stats">
     <!-- Dashboard card showing total number of custom orders -->
-    <div class="stat-card">
+    <div class="stat-card" href="{% url 'list' %}">
         <h2>{{ total_orders }}</h2>
         <p>Total Orders</p>
     </div>
 
     <!-- Dashboard card showing orders waiting to be reviewed -->
-    <div class="stat-card">
+    <div class="stat-card" href="{% url 'list'%}?status=Pending">
         <h2>{{ pending_orders }}</h2>
         <p>Pending Orders</p>
     </div>
 
     <!-- Dashboard card showing finished orders -->
-    <div class="stat-card">
+    <div class="stat-card" href="{% url 'list' %}?status=Completed">
         <h2>{{ completed_orders }}</h2>
         <p>Completed Orders</p>
     </div>
 
     <!-- Dashboard card showing total furniture products -->
-    <div class="stat-card">
+    <div class="stat-card" href="{% url 'products' %}">
         <h2>{{ total_products }}</h2>
         <p>Products Available</p>
     </div>

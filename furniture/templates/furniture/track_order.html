@@ -1,0 +1,42 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Track Your Order</h1>
+
+<p>Enter your order reference number and email to check status.</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>
+        <label>Order ID:</label>
+        <input type="number" name="order_id" required>
+    </p>
+
+    <p>
+        <label>Email:</label>
+        <input type="email" name="email" required>
+    </p>
+
+    <button type="submit">Track Order</button>
+</form>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+{% if order %}
+    <h2>Order Details</h2>
+
+    <p><strong>Order #:</strong> {{ order.id }}</p>
+    <p><strong>Furniture Type:</strong> {{ order.furniture_type }}</p>
+    <p><strong>Material:</strong> {{ order.material }}</p>
+
+    <p>
+        <strong>Status:</strong>
+        <span class="status-badge status-{{ order.status|slugify }}">
+            {{ order.status }}
+        </span>
+    </p>
+{% endif %}
+{% endblock %}

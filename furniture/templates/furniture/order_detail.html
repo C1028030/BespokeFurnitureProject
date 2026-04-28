@@ -12,6 +12,27 @@
 <p><strong>Requirements:</strong> {{ order.requirements }}</p>
 <p><strong>Status:</strong> {{ order.status }}</p>
 <p><strong>Submitted:</strong> {{ order.created_at|date:"d M Y, H:i" }}</p>
+<br>
+<br>
+
+<!-- Order Progress Timeline -->
+<h2>Order Progress</h2>
+
+<div class="timeline">
+    {% for step in timeline_steps %}
+        <div class="timeline-step {{ step.state }}">
+            <!-- Numbered circle for each progress stage -->
+            <div class="timeline-circle">
+                {{ forloop.counter }}
+            </div>
+
+            <!-- Status label below the circle -->
+            <p>{{ step.name }}</p>
+        </div>
+    {% endfor %}
+</div>
+<br>
+<br>
 
 <!-- Navigation buttons -->
 <a class="button-link" href="{% url 'list' %}">Back to Orders</a>

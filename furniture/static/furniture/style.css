@@ -273,3 +273,100 @@ table {
 .button-link.danger:hover {
     background-color: #e74c3c;
 }
+
+/* Makes dashboard cards behave like clean clickable buttons */
+.stat-card {
+    text-decoration: none;
+    color: inherit;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    transition: 0.2s ease;
+}
+
+/* Main timeline wrapper */
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 35px 0;
+    position: relative;
+}
+
+/* Grey line running behind all timeline circles */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 19px;
+    left: 8%;
+    right: 8%;
+    height: 4px;
+    background-color: #d6d1cc;
+    z-index: 0;
+}
+
+/* Each individual timeline step */
+.timeline-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Numbered circle */
+.timeline-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #d6d1cc;
+    color: #555;
+    margin: 0 auto 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border: 4px solid white;
+}
+
+/* Completed circle */
+.timeline-step.completed .timeline-circle {
+    background-color: #27ae60;
+    color: white;
+}
+
+/* Current active circle */
+.timeline-step.active .timeline-circle {
+    background-color: #5c4033;
+    color: white;
+    transform: scale(1.15);
+}
+
+/* Upcoming circle */
+.timeline-step.upcoming .timeline-circle {
+    background-color: #d6d1cc;
+    color: #777;
+}
+
+/* Timeline labels */
+.timeline-step p {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    color: #555;
+}
+
+/* Completed label */
+.timeline-step.completed p {
+    color: #27ae60;
+}
+
+/* Active label */
+.timeline-step.active p {
+    color: #5c4033;
+}
+
+/* Smooth animation for circle changes */
+.timeline-circle {
+    transition: all 0.25s ease;
+}
