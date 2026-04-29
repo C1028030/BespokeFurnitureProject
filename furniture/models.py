@@ -26,6 +26,14 @@ class CustomOrder(models.Model):
         ('Completed', 'Completed'),
     ]
 
+    # Priority options used by staff to manage workload
+    PRIORITY_CHOICES = [
+        ('Low', 'Low'),
+        ('Normal', 'Normal'),
+        ('High', 'High'),
+        ('Urgent', 'Urgent'),
+    ]
+
     customer_name = models.CharField(max_length=100)
     email = models.EmailField()
     furniture_type = models.CharField(max_length=100)
@@ -38,6 +46,13 @@ class CustomOrder(models.Model):
         max_length=30,
         choices=STATUS_CHOICES,
         default='Pending'
+    )
+
+    # Default priority for new customer orders
+    priority = models.CharField(
+        max_length=20,
+        choices=PRIORITY_CHOICES,
+        default='Normal'
     )
 
     created_at = models.DateTimeField(auto_now_add=True)

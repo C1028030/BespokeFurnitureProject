@@ -1,0 +1,34 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Delivery Planning</h1>
+<p>Orders grouped for efficient delivery.</p>
+
+{% for material, orders in grouped_orders.items %}
+    <h2>{{ material }} ({{ orders|length }} orders)</h2>
+
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Furniture Type</th>
+            <th>Status</th>
+        </tr>
+
+        {% for order in orders %}
+        <tr>
+            <td>#{{ order.id }}</td>
+            <td>{{ order.customer_name }}</td>
+            <td>{{ order.furniture_type }}</td>
+            <td>
+                <span class="status-badge status-{{ order.status|slugify }}">
+                    {{ order.status }}
+                </span>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% empty %}
+    <p>No orders ready for delivery planning.</p>
+{% endfor %}
+{% endblock %}

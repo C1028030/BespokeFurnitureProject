@@ -1,0 +1,51 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Customer Order History</h1>
+<p>Search by customer email to view previous custom furniture requests.</p>
+
+<form method="GET">
+    <p>
+        <label for="email">Customer Email:</label>
+        <input type="email" name="email" id="email" value="{{ email }}" required>
+    </p>
+
+    <button type="submit">Search History</button>
+</form>
+
+{% if orders %}
+    <h2>Orders for {{ email }}</h2>
+
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>Furniture Type</th>
+            <th>Material</th>
+            <th>Dimensions</th>
+            <th>Status</th>
+            <th>Submitted</th>
+            <th>Action</th>
+        </tr>
+
+        {% for order in orders %}
+        <tr>
+            <td>#{{ order.id }}</td>
+            <td>{{ order.furniture_type }}</td>
+            <td>{{ order.material }}</td>
+            <td>{{ order.dimensions }}</td>
+            <td>
+                <span class="status-badge status-{{ order.status|slugify }}">
+                    {{ order.status }}
+                </span>
+            </td>
+            <td>{{ order.created_at|date:"d M Y, H:i" }}</td>
+            <td>
+                <a href="{% url 'order_detail' order.id %}">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% elif email %}
+    <p>No order history found for {{ email }}.</p>
+{% endif %}
+{% endblock %}

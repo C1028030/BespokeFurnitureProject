@@ -370,3 +370,43 @@ table {
 .timeline-circle {
     transition: all 0.25s ease;
 }
+
+/* Analytics chart container */
+.analytics-section {
+    margin: 35px 0;
+    padding: 25px;
+    background-color: #f8f5f1;
+    border-radius: 10px;
+}
+
+/* Keeps the chart at a sensible size */
+.analytics-section canvas {
+    max-height: 350px;
+}
+
+/* Shared priority badge style */
+.priority-badge {
+    padding: 6px 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Priority colours */
+.priority-low {
+    background-color: #7f8c8d;
+}
+
+.priority-normal {
+    background-color: #3498db;
+}
+
+.priority-high {
+    background-color: #e67e22;
+}
+
+.priority-urgent {
+    background-color: #c0392b;
+}

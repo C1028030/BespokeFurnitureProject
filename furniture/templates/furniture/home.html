@@ -13,6 +13,7 @@
     </div>
 </section>
 
+<!-- Dashboard Cards -->
 <section class="dashboard-stats">
     <!-- Dashboard card showing total number of custom orders -->
     <div class="stat-card" href="{% url 'list' %}">
@@ -38,6 +39,82 @@
         <p>Products Available</p>
     </div>
 </section>
+
+<section class="analytics-section">
+    <h2>Orders by Status</h2>
+
+    <!-- Canvas is where Chart.js draws the chart -->
+    <canvas id="ordersStatusChart"></canvas>
+</section>
+
+<!-- Loads Chart.js from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{{ status_labels|json_script:"status-labels" }}
+{{ status_counts|json_script:"status-counts" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const statusLabels = JSON.parse(document.getElementById('status-labels').textContent);
+    const statusCounts = JSON.parse(document.getElementById('status-counts').textContent);
+
+    const ctx = document.getElementById('ordersStatusChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: statusLabels,
+            datasets: [{
+                label: 'Number of Orders',
+                data: statusCounts
+            }]
+        }
+    });
+</script>
+
+<section class="analytics-section">
+    <h2>Orders Over Time</h2>
+
+    <!-- Canvas where Chart.js draws the line chart -->
+    <canvas id="ordersOverTimeChart"></canvas>
+</section>
+
+{{ daily_order_labels|json_script:"daily-order-labels" }}
+{{ daily_order_counts|json_script:"daily-order-counts" }}
+
+<script>
+    // Safely reads daily order chart data from Django
+    const dailyOrderLabels = JSON.parse(document.getElementById('daily-order-labels').textContent);
+    const dailyOrderCounts = JSON.parse(document.getElementById('daily-order-counts').textContent);
+
+    // Finds the canvas for the orders over time chart
+    const timeCtx = document.getElementById('ordersOverTimeChart');
+
+    // Creates a line chart for order submissions by date
+    new Chart(timeCtx, {
+        type: 'line',
+        data: {
+            labels: dailyOrderLabels,
+            datasets: [{
+                label: 'Orders Submitted',
+                data: dailyOrderCounts,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+</script>
 
 <section class="features">
     <div class="feature-card">

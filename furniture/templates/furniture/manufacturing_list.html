@@ -1,0 +1,36 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Manufacturing List</h1>
+<p>Active custom orders that still need to be produced.</p>
+
+{% if orders %}
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>Furniture Type</th>
+        <th>Material</th>
+        <th>Dimensions</th>
+        <th>Requirements</th>
+        <th>Status</th>
+    </tr>
+
+    {% for order in orders %}
+    <tr>
+        <td>#{{ order.id }}</td>
+        <td>{{ order.furniture_type }}</td>
+        <td>{{ order.material }}</td>
+        <td>{{ order.dimensions }}</td>
+        <td>{{ order.requirements }}</td>
+        <td>
+            <span class="status-badge status-{{ order.status|slugify }}">
+                {{ order.status }}
+            </span>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No active manufacturing orders.</p>
+{% endif %}
+{% endblock %}

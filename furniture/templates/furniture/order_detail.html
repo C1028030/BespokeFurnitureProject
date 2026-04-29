@@ -12,6 +12,13 @@
 <p><strong>Requirements:</strong> {{ order.requirements }}</p>
 <p><strong>Status:</strong> {{ order.status }}</p>
 <p><strong>Submitted:</strong> {{ order.created_at|date:"d M Y, H:i" }}</p>
+<p>
+    <strong>Priority:</strong>
+    <!-- Shows priority level for staff -->
+    <span class="priority-badge priority-{{ order.priority|slugify }}">
+        {{ order.priority }}
+    </span>
+</p>
 <br>
 <br>
 

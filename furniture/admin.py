@@ -4,9 +4,9 @@ from .models import Furniture, CustomOrder
 @admin.register(CustomOrder)
 class CustomOrderAdmin(admin.ModelAdmin):
     # Columns shown in the admin order list
-    list_display = ('id', 'customer_name', 'email', 'furniture_type', 'status', 'created_at')
+    list_display = ('id', 'customer_name', 'email', 'furniture_type', 'status', 'priority', 'created_at')
     # Filters shown on the right side
-    list_filter = ('status', 'material')
+    list_filter = ('status', 'priority', 'material')
     # Search box fields
     search_fields = ('customer_name', 'furniture_type')
 
