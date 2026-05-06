@@ -1,42 +1,95 @@
 {% extends 'furniture/base.html' %}
 
 {% block content %}
-<h1>Track Your Order</h1>
+<h1>Track Orders</h1>
 
-<p>Enter your order reference number and email to check status.</p>
+{% if user.is_authenticated %}
 
-<form method="POST">
-    {% csrf_token %}
+    <p>Your orders are shown below.</p>
+
+    {% if orders %}
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>Furniture Type</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Submitted</th>
+                <th>Action</th>
+            </tr>
+
+            {% for order in orders %}
+            <tr>
+                <td>#{{ order.id }}</td>
+
+                <td>{{ order.furniture_type }}</td>
+
+                <td>
+                    <span class="status-badge status-{{ order.status|slugify }}">
+                        {{ order.status }}
+                    </span>
+                </td>
+
+                <td>
+                    <span class="priority-badge priority-{{ order.priority|slugify }}">
+                        {{ order.priority }}
+                    </span>
+                </td>
+
+                <td>{{ order.created_at|date:"d M Y, H:i" }}</td>
+
+                <td>
+                    <a href="{% url 'order_detail' order.id %}">
+                        View
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No orders found for your account.</p>
+    {% endif %}
+
+{% else %}
 
     <p>
-        <label>Order ID:</label>
-        <input type="number" name="order_id" required>
+        Enter your order reference number and email address.
     </p>
 
-    <p>
-        <label>Email:</label>
-        <input type="email" name="email" required>
-    </p>
+    <form method="POST">
+        {% csrf_token %}
 
-    <button type="submit">Track Order</button>
-</form>
+        <p>
+            <label>Order ID:</label>
+            <input type="number" name="order_id" required>
+        </p>
 
-{% if error %}
-    <p style="color:red;">{{ error }}</p>
+        <p>
+            <label>Email:</label>
+            <input type="email" name="email" required>
+        </p>
+
+        <button type="submit">Track Order</button>
+    </form>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    {% if order %}
+        <h2>Order Details</h2>
+
+        <p><strong>Order #:</strong> {{ order.id }}</p>
+
+        <p>
+            <strong>Status:</strong>
+
+            <span class="status-badge status-{{ order.status|slugify }}">
+                {{ order.status }}
+            </span>
+        </p>
+    {% endif %}
+
 {% endif %}
 
-{% if order %}
-    <h2>Order Details</h2>
-
-    <p><strong>Order #:</strong> {{ order.id }}</p>
-    <p><strong>Furniture Type:</strong> {{ order.furniture_type }}</p>
-    <p><strong>Material:</strong> {{ order.material }}</p>
-
-    <p>
-        <strong>Status:</strong>
-        <span class="status-badge status-{{ order.status|slugify }}">
-            {{ order.status }}
-        </span>
-    </p>
-{% endif %}
 {% endblock %}

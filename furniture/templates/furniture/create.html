@@ -3,7 +3,8 @@
 {% block content %}
 <h1>Create Custom Furniture Order</h1>
 
-<form method="POST">
+<!-- enctype allows file uploads to work -->
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit Order</button>

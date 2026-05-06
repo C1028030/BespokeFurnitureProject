@@ -4,7 +4,11 @@ from .models import CustomOrder, Furniture
 from django.contrib.auth.decorators import login_required # Used to stop non-logged in users from accessing staff pages
 from django.db import models
 import csv # Used to create downloadable CSV files
-from django.http import HttpResponse # Used to return a file response to the browser
+from django.http import HttpResponse # Used to return a file response to the browser and create PDF responses
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle # Used to generate PDF documents
+# Used for basic PDF styling
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
 
 def home(request):
     # Counts all custom orders in the database
@@ -62,16 +66,16 @@ def home(request):
 
 def create_furniture(request):
     if request.method == 'POST':
-        # Create form using user-submitted data
-        form = CustomOrderCreateForm(request.POST)
+        # Handles both text form data and uploaded files
+        form = CustomOrderCreateForm(request.POST, request.FILES)
 
         # Check if form data is valid
         if form.is_valid():
-            order = form.save() # Save the order and store it in a variable
-            return redirect('order_success', order_id=order.id) # Redirect to success page and pass order ID in the url
+            order = form.save() # Saves order, including uploaded file if provided
+            return redirect('order_success', order_id=order.id) # Sends customer to success page with their order reference
     
     else:
-        # Create an empty form when page first loads
+        # Empty form shown when customer first opens the page
         form = CustomOrderCreateForm()
 
     return render(request, 'furniture/create.html', {'form': form})
@@ -247,21 +251,33 @@ def order_success(request, order_id):
 
 def track_order(request):
     order = None
+    orders = None
     error = None
 
-    if request.method == 'POST':
+    # Logged-in users automatically see
+    # all orders linked to their email
+    if request.user.is_authenticated:
+        orders = CustomOrder.objects.filter(
+            email__iexact=request.user.email
+        ).order_by('-created_at')
+
+    # Guest tracking form
+    elif request.method == 'POST':
         order_id = request.POST.get('order_id')
         email = request.POST.get('email')
 
         try:
-            # Try to find matching order
-            order = CustomOrder.objects.get(id=order_id, email=email)
+            # Finds matching guest order
+            order = CustomOrder.objects.get(
+                id=order_id,
+                email=email
+            )
         except CustomOrder.DoesNotExist:
-            # Show error if not found
-            error = "no order found with those details"
-    
-    return render(request, 'furniture/track_order.html',{
+            error = "No order found with those details."
+
+    return render(request, 'furniture/track_order.html', {
         'order': order,
+        'orders': orders,
         'error': error
     })
 
@@ -371,4 +387,74 @@ def customer_history(request):
     return render(request, 'furniture/customer_history.html', {
         'orders': orders,
         'email': email
+    })
+
+@login_required
+def export_order_pdf(request, order_id):
+    # Gets the selected order or shows 404 if it does not exist
+    order = get_object_or_404(CustomOrder, id=order_id)
+
+    # Creates a PDF response for the browser
+    response = HttpResponse(content_type='application/pdf')
+
+    # Forces the browser to download the file
+    response['Content-Disposition'] = f'attachment; filename="order_{order.id}.pdf"'
+
+    # Creates the PDF document
+    document = SimpleDocTemplate(response)
+
+    # Stores all content that will be added to the PDF
+    elements = []
+
+    # Loads default ReportLab text styles
+    styles = getSampleStyleSheet()
+
+    # Adds PDF title
+    elements.append(Paragraph(f"Custom Furniture Order #{order.id}", styles['Title']))
+    elements.append(Spacer(1, 12))
+
+    # Table data for the order summary
+    data = [
+        ['Customer Name', order.customer_name],
+        ['Email', order.email],
+        ['Furniture Type', order.furniture_type],
+        ['Dimensions', order.dimensions],
+        ['Material', order.material],
+        ['Requirements', order.requirements],
+        ['Status', order.status],
+        ['Priority', order.priority],
+        ['Submitted', order.created_at.strftime('%d %b %Y, %H:%M')],
+    ]
+
+    # Creates a table inside the PDF
+    table = Table(data, colWidths=[150, 330])
+
+    # Styles the table to make it readable
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('PADDING', (0, 0), (-1, -1), 8),
+    ]))
+
+    # Adds table to the PDF
+    elements.append(table)
+
+    # Builds and returns the finished PDF
+    document.build(elements)
+
+    return response
+
+@login_required
+def profile(request):
+    # Gets orders that match the logged-in user's email address.
+    # This lets customers see their own orders without changing the database model yet.
+    orders = CustomOrder.objects.filter(
+        email__iexact=request.user.email
+    ).order_by('-created_at')
+
+    # Sends user details and matching orders to the profile template.
+    return render(request, 'furniture/profile.html', {
+        'orders': orders
     })

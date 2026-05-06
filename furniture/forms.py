@@ -12,6 +12,7 @@ class CustomOrderCreateForm(forms.ModelForm):
             'dimensions',
             'material',
             'requirements',
+            'design_file', # Lets customers upload a sketch/design file
         ]
 
 # Form used by staff (includes status)

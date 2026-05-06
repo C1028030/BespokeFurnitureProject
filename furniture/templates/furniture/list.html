@@ -78,7 +78,7 @@
         <th>Priority</th>
     </tr>
     {% for order in orders %}
-    <tr>
+    <tr class="{% if order.priority == 'Urgent' %}urgent-row{% endif %}">
         <td>{{ order.customer_name }}</td>
         <td>{{ order.email }}</td>
         <td>{{ order.furniture_type }}</td>

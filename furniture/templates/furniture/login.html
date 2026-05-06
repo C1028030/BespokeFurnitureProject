@@ -1,0 +1,15 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>Login</h1>
+
+<!-- Login form uses Django's built-in authentication system -->
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Login</button>
+</form>
+
+{% endblock %}

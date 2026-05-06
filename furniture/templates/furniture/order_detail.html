@@ -10,6 +10,15 @@
 <p><strong>Dimensions:</strong> {{ order.dimensions }}</p>
 <p><strong>Material:</strong> {{ order.material }}</p>
 <p><strong>Requirements:</strong> {{ order.requirements }}</p>
+{% if order.design_file %}
+    <p>
+        <strong>Uploaded Design</strong>
+        <!-- Opens uploaded sketch/design file -->
+         <a href="{{ order.design_file.url }}" target="_blank">View Design File</a>
+    </p>
+{% else %}
+    <p><strong>Uploaded Design: </strong> No design file uploaded.</p>
+{% endif %}
 <p><strong>Status:</strong> {{ order.status }}</p>
 <p><strong>Submitted:</strong> {{ order.created_at|date:"d M Y, H:i" }}</p>
 <p>
@@ -45,4 +54,7 @@
 <a class="button-link" href="{% url 'list' %}">Back to Orders</a>
 <a class="button-link secondary" href="{% url 'edit_order' order.id %}">Edit Order</a>
 <a class="button-link danger" href="{% url 'delete_order' order.id %}">Delete Order</a>
+<a class="button-link" href="{% url 'export_order_pdf' order.id %}"> <!-- Downloads this order as a PDF file -->
+    Download PDF
+</a>
 {% endblock %}

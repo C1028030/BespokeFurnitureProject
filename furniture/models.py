@@ -41,6 +41,14 @@ class CustomOrder(models.Model):
     material = models.CharField(max_length=50)
     requirements = models.TextField()
 
+    # Optional file upload for customer sketches/designs
+    # Files will be stored inside media/design_uploads
+    design_file = models.FileField(
+        upload_to='design_uploads/',
+        blank=True,
+        null=True
+    )
+
     # Default status when a new order is created
     status = models.CharField(
         max_length=30,

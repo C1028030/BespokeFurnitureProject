@@ -126,7 +126,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Where Django sends users if they try to access a protected page
-LOGIN_URL = '/admin/login/'
+LOGIN_URL = '/login/'
 
 # Where users go after logging in successfully
-LOGIN_REDIRECT_URL = '/list/'
+LOGIN_REDIRECT_URL = '/profile/'

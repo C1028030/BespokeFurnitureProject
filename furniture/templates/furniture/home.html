@@ -13,108 +13,149 @@
     </div>
 </section>
 
-<!-- Dashboard Cards -->
-<section class="dashboard-stats">
-    <!-- Dashboard card showing total number of custom orders -->
-    <div class="stat-card" href="{% url 'list' %}">
-        <h2>{{ total_orders }}</h2>
-        <p>Total Orders</p>
-    </div>
+{% if user.is_staff %}
+    <!-- Dashboard Cards -->
+    <section class="dashboard-stats">
+        <!-- Dashboard card showing total number of custom orders -->
+        <div class="stat-card" href="{% url 'list' %}">
+            <h2>{{ total_orders }}</h2>
+            <p>Total Orders</p>
+        </div>
 
-    <!-- Dashboard card showing orders waiting to be reviewed -->
-    <div class="stat-card" href="{% url 'list'%}?status=Pending">
-        <h2>{{ pending_orders }}</h2>
-        <p>Pending Orders</p>
-    </div>
+        <!-- Dashboard card showing orders waiting to be reviewed -->
+        <div class="stat-card" href="{% url 'list'%}?status=Pending">
+            <h2>{{ pending_orders }}</h2>
+            <p>Pending Orders</p>
+        </div>
 
-    <!-- Dashboard card showing finished orders -->
-    <div class="stat-card" href="{% url 'list' %}?status=Completed">
-        <h2>{{ completed_orders }}</h2>
-        <p>Completed Orders</p>
-    </div>
+        <!-- Dashboard card showing finished orders -->
+        <div class="stat-card" href="{% url 'list' %}?status=Completed">
+            <h2>{{ completed_orders }}</h2>
+            <p>Completed Orders</p>
+        </div>
 
-    <!-- Dashboard card showing total furniture products -->
-    <div class="stat-card" href="{% url 'products' %}">
-        <h2>{{ total_products }}</h2>
-        <p>Products Available</p>
+        <!-- Dashboard card showing total furniture products -->
+        <div class="stat-card" href="{% url 'products' %}">
+            <h2>{{ total_products }}</h2>
+            <p>Products Available</p>
+        </div>
+    </section>
+{% endif %}
+
+<!-- Quick Actions -->
+<section class="quick-actions">
+    <h2>Quick Actions</h2>
+
+    <div class="action-grid">
+        <!-- Public/customer action -->
+        <a class="action-card" href="{% url 'create' %}">
+            <h3>Create Custom Order</h3>
+            <p>Submit a bespoke furniture request with dimensions and design files.</p>
+        </a>
+
+        <!-- Public/customer action -->
+        <a class="action-card" href="{% url 'track_order' %}">
+            <h3>Track Order</h3>
+            <p>Check the progress of an existing order using the reference number.</p>
+        </a>
+
+        <!-- Staff-only action -->
+        {% if user.is_staff %}
+        <a class="action-card" href="{% url 'list' %}">
+            <h3>Manage Orders</h3>
+            <p>Search, filter, update, export, and prioritise customer orders.</p>
+        </a>
+
+        <a class="action-card" href="{% url 'manufacturing_list' %}">
+            <h3>Manufacturing List</h3>
+            <p>View active production orders grouped for workshop planning.</p>
+        </a>
+
+        <a class="action-card" href="{% url 'delivery_planning' %}">
+            <h3>Delivery Planning</h3>
+            <p>Group orders for efficient delivery batching and planning.</p>
+        </a>
+        {% endif %}
     </div>
 </section>
 
-<section class="analytics-section">
-    <h2>Orders by Status</h2>
+{% if user.is_staff %}
+    <section class="analytics-section">
+        <h2>Orders by Status</h2>
 
-    <!-- Canvas is where Chart.js draws the chart -->
-    <canvas id="ordersStatusChart"></canvas>
-</section>
+        <!-- Canvas is where Chart.js draws the chart -->
+        <canvas id="ordersStatusChart"></canvas>
+    </section>
 
-<!-- Loads Chart.js from CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Loads Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-{{ status_labels|json_script:"status-labels" }}
-{{ status_counts|json_script:"status-counts" }}
+    {{ status_labels|json_script:"status-labels" }}
+    {{ status_counts|json_script:"status-counts" }}
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-    const statusLabels = JSON.parse(document.getElementById('status-labels').textContent);
-    const statusCounts = JSON.parse(document.getElementById('status-counts').textContent);
+    <script>
+        const statusLabels = JSON.parse(document.getElementById('status-labels').textContent);
+        const statusCounts = JSON.parse(document.getElementById('status-counts').textContent);
 
-    const ctx = document.getElementById('ordersStatusChart');
+        const ctx = document.getElementById('ordersStatusChart');
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: statusLabels,
-            datasets: [{
-                label: 'Number of Orders',
-                data: statusCounts
-            }]
-        }
-    });
-</script>
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: statusLabels,
+                datasets: [{
+                    label: 'Number of Orders',
+                    data: statusCounts
+                }]
+            }
+        });
+    </script>
 
-<section class="analytics-section">
-    <h2>Orders Over Time</h2>
+    <section class="analytics-section">
+        <h2>Orders Over Time</h2>
 
-    <!-- Canvas where Chart.js draws the line chart -->
-    <canvas id="ordersOverTimeChart"></canvas>
-</section>
+        <!-- Canvas where Chart.js draws the line chart -->
+        <canvas id="ordersOverTimeChart"></canvas>
+    </section>
 
-{{ daily_order_labels|json_script:"daily-order-labels" }}
-{{ daily_order_counts|json_script:"daily-order-counts" }}
+    {{ daily_order_labels|json_script:"daily-order-labels" }}
+    {{ daily_order_counts|json_script:"daily-order-counts" }}
 
-<script>
-    // Safely reads daily order chart data from Django
-    const dailyOrderLabels = JSON.parse(document.getElementById('daily-order-labels').textContent);
-    const dailyOrderCounts = JSON.parse(document.getElementById('daily-order-counts').textContent);
+    <script>
+        // Safely reads daily order chart data from Django
+        const dailyOrderLabels = JSON.parse(document.getElementById('daily-order-labels').textContent);
+        const dailyOrderCounts = JSON.parse(document.getElementById('daily-order-counts').textContent);
 
-    // Finds the canvas for the orders over time chart
-    const timeCtx = document.getElementById('ordersOverTimeChart');
+        // Finds the canvas for the orders over time chart
+        const timeCtx = document.getElementById('ordersOverTimeChart');
 
-    // Creates a line chart for order submissions by date
-    new Chart(timeCtx, {
-        type: 'line',
-        data: {
-            labels: dailyOrderLabels,
-            datasets: [{
-                label: 'Orders Submitted',
-                data: dailyOrderCounts,
-                tension: 0.3
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        precision: 0
+        // Creates a line chart for order submissions by date
+        new Chart(timeCtx, {
+            type: 'line',
+            data: {
+                labels: dailyOrderLabels,
+                datasets: [{
+                    label: 'Orders Submitted',
+                    data: dailyOrderCounts,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
                     }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
+{% endif %}
 
 <section class="features">
     <div class="feature-card">

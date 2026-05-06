@@ -3,21 +3,42 @@
 <html>
 <head>
     <title>Bespoke Furniture</title>
+
+    <!-- Loads the shared stylesheet for the whole website -->
     <link rel="stylesheet" href="{% static 'furniture/style.css' %}">
 </head>
 <body>
     <nav>
         <div class="nav-container">
+            <!-- Site branding -->
             <h2>Bespoke Furniture</h2>
+
             <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/create/">Create Furniture</a>
-                <a href="/list/">Custom Orders</a>
-                <a href="/products/">Furniture Products</a>
-                <a href="/track-order/">Track Order</a>
-                <a href="/manufacturing/">Manufacturing</a>
-                <a href="/delivery/">Delivery</a>
-                <a href="/customer-history/">Customer History</a>
+                <!-- Public links -->
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'products' %}">Products</a>
+                <a href="{% url 'create' %}">Create Order</a>
+                <a href="{% url 'track_order' %}">Track Order</a>
+
+                {% if user.is_authenticated %}
+                    <!-- Logged-in user profile -->
+                    <a href="{% url 'profile' %}">Profile</a>
+
+                    {% if user.is_staff %}
+                        <!-- Staff-only management links -->
+                        <a href="{% url 'list' %}">Orders</a>
+                        <a href="{% url 'manufacturing_list' %}">Manufacturing</a>
+                        <a href="{% url 'delivery_planning' %}">Delivery</a>
+                    {% endif %}
+
+                    <!--Logout must be submitted as POST for Django's LogoutView-->
+                    <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                {% else %}
+                    <a class="nav-login" href="{% url 'login' %}">Login</a>
+                {% endif %}
             </div>
         </div>
     </nav>

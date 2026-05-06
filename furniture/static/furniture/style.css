@@ -410,3 +410,153 @@ table {
 .priority-urgent {
     background-color: #c0392b;
 }
+
+/* Highlights urgent orders in the staff order table */
+.urgent-row {
+    background-color: #fdecea !important;
+    border-left: 5px solid #c0392b;
+}
+
+/* Makes urgent rows slightly stronger when hovered */
+.urgent-row:hover {
+    background-color: #f9d6d2 !important;
+}
+
+/* Profile info card */
+.profile-card {
+    background-color: #f8f5f1;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #5c4033;
+    margin-bottom: 25px;
+}
+
+/* Makes the navbar cleaner and allows it to wrap on smaller screens */
+.nav-container {
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.nav-links a {
+    margin-left: 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    text-decoration: none;
+}
+
+/* Highlights login/logout links slightly */
+.nav-login,
+.nav-logout {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Quick action dashboard section */
+.quick-actions {
+    margin: 35px 0;
+}
+
+.quick-actions h2 {
+    color: #5c4033;
+}
+
+/* Responsive card grid */
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+/* Dashboard action card */
+.action-card {
+    background-color: #f8f5f1;
+    border-radius: 10px;
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    border-left: 5px solid #5c4033;
+    transition: 0.2s ease;
+}
+
+/* Hover effect to make cards feel clickable */
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Card heading */
+.action-card h3 {
+    color: #5c4033;
+    margin-top: 0;
+}
+
+/* Prevents wide tables breaking the page layout */
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Improves layout on smaller screens */
+@media (max-width: 700px) {
+    .container {
+        width: 92%;
+        padding: 18px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Makes logout form look like the navbar links */
+.logout-form {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+/* Makes logout button align perfectly with links */
+.logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: none;
+    border: none;
+    color: white;
+
+    padding: 8px 10px;
+    border-radius: 6px;
+
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Hover effect matches navbar links */
+.logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}

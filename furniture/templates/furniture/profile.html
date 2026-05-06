@@ -1,0 +1,57 @@
+{% extends 'furniture/base.html' %}
+
+{% block content %}
+<h1>My Profile</h1>
+
+<div class="profile-card">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+
+    {% if user.is_staff %}
+        <p><strong>Account Type:</strong> Staff/Admin</p>
+    {% else %}
+        <p><strong>Account Type:</strong> Customer</p>
+    {% endif %}
+</div>
+
+<h2>My Order History</h2>
+
+{% if orders %}
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>Furniture Type</th>
+        <th>Material</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Submitted</th>
+        <th>Action</th>
+    </tr>
+
+    {% for order in orders %}
+    <tr>
+        <td>#{{ order.id }}</td>
+        <td>{{ order.furniture_type }}</td>
+        <td>{{ order.material }}</td>
+        <td>
+            <span class="status-badge status-{{ order.status|slugify }}">
+                {{ order.status }}
+            </span>
+        </td>
+        <td>
+            <span class="priority-badge priority-{{ order.priority|slugify }}">
+                {{ order.priority }}
+            </span>
+        </td>
+        <td>{{ order.created_at|date:"d M Y, H:i" }}</td>
+        <td>
+            <!-- Customer can track using existing tracking feature -->
+            <a href="{% url 'track_order' %}">Track</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No orders found for your account email.</p>
+{% endif %}
+{% endblock %}
