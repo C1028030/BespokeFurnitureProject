@@ -9,6 +9,9 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 # Used for basic PDF styling
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
+from django.contrib.auth.forms import UserCreationForm # Django built-in user registration form
+from django.contrib.auth import login # Automatically logs user in after registration
+from .forms import CustomerRegisterForm
 
 def home(request):
     # Counts all custom orders in the database
@@ -457,4 +460,31 @@ def profile(request):
     # Sends user details and matching orders to the profile template.
     return render(request, 'furniture/profile.html', {
         'orders': orders
+    })
+
+def register(request):
+    # Handles customer account registration
+    if request.method == 'POST':
+
+        # Creates form using submitted data
+        form = CustomerRegisterForm(request.POST)
+
+        # Checks if form is valid
+        if form.is_valid():
+
+            # Saves new user account
+            user = form.save()
+
+            # Automatically logs user in
+            login(request, user)
+
+            # Redirects user to profile page
+            return redirect('profile')
+
+    else:
+        # Empty form when page first loads
+        form = CustomerRegisterForm()
+
+    return render(request, 'furniture/register.html', {
+        'form': form
     })

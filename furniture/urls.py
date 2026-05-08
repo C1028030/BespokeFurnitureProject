@@ -21,4 +21,5 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'), # Logged-in user profile page
     path('login/', auth_views.LoginView.as_view(template_name='furniture/login.html'), name='login'), # Customer login page
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'), # Customer logout page
+    path('register/', views.register, name='register'), # Customer registration page
 ]
