@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
+    padding-top: 10px;
 }
 
 nav {
@@ -136,28 +137,63 @@ select {
     background-color: white;
 }
 
-table {
-    margin-top: 25px;
-}
-
+/* Homepage Hero Section */
 .hero {
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 50px 20px;
+    background:
+        linear-gradient(rgba(75, 46, 36, 0.72), rgba(75, 46, 36, 0.72)),
+        url("/media/products/Oak_Dining_Table.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 18px;
+    padding: 50px 25px;
+    margin-bottom: 35px;
 }
 
+/* Hero text wrapper */
+.hero-content {
+    max-width: 850px;
+    color: white;
+}
+
+/* Small label above hero title */
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+/* Main hero title */
 .hero h1 {
-    font-size: 38px;
-    margin-bottom: 15px;
+    font-size: 48px;
+    line-height: 1.1;
+    margin: 15px 0;
+    color: white;
 }
 
-.hero p {
+/* Supporting hero text */
+.hero-description {
     font-size: 18px;
     max-width: 700px;
     margin: 0 auto 25px auto;
+    opacity: 0.95;
 }
 
-.hero-buttons {
+/* Hero button spacing */
+.hero-actions {
     margin-top: 25px;
+}
+
+/* Makes secondary hero button stand out on image background */
+.hero-actions .secondary {
+    background-color: rgba(255, 2555, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .button-link {
@@ -179,23 +215,33 @@ table {
     background-color: #8b7355;
 }
 
+/* Feature section spacing */
 .features {
+    margin-top: 45px;
+}
+
+.feature-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
 }
 
 .feature-card {
-    background-color: #f8f5f1;
-    padding: 20px;
-    border-radius: 10px;
-    border-left: 5px solid #5c4033;
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: 0.2s ease;
 }
 
-.feature-card h2 {
-    color: #5c4033;
+.feature-card:hover {
+    transform: translateY(-2px);
+}
+
+.feature-card h3 {
     margin-top: 0;
+    margin-bottom: 12px;
 }
 
 /* Shared badge styling */
@@ -431,34 +477,127 @@ table {
     margin-bottom: 25px;
 }
 
-/* Makes the navbar cleaner and allows it to wrap on smaller screens */
+/* Modern floating navbar */
+.site-navbar {
+    position: sticky;
+    top: 12px;
+    width: 94%;
+    margin: 0 auto;
+    background: rgba(75, 46, 36, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 16px 28px;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    z-index: 1000;
+}
+
+/* Navbar layout */
 .nav-container {
-    gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
     flex-wrap: wrap;
 }
 
+/* Brand logo */
+.brand-logo {
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    transition: 0.25s ease;
+}
+
+/* Slight hover animation */
+.brand-logo:hover {
+    opacity: 0.88;
+}
+
+/* Navigation links container */
 .nav-links {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
     align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-.nav-links a {
-    margin-left: 0;
-    padding: 8px 10px;
-    border-radius: 6px;
-}
-
-.nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+/* Navbar links/buttons */
+.nav-links a,
+.nav-button {
+    color: rgba(255,255,255,0.92);
     text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition:
+        background 0.25s ease,
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+/* Hover effect */
+.nav-links a:hover,
+.nav-button:hover {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Register button highlight */
+.nav-button.highlight {
+    background: white;
+    color: #4b2e24;
+}
+
+/* Register hover */
+.nav-button.highlight:hover {
+    background: #f4ece7;
+    color: #2d1a14;
+}
+
+/* Logout form reset */
+.logout-form {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
 
 /* Highlights login/logout links slightly */
 .nav-login,
 .nav-logout {
     background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Prevent global button styles affecting navbar logout */
+.site-navbar .nav-button {
+    background: transparent;
+    color: rgba(255,255,255,0.92);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    font-family: inherit;
+}
+
+/* Navbar logout hover */
+.site-navbar .nav-button:hover {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    transform: translateY(-2px);
 }
 
 /* Quick action dashboard section */
@@ -500,13 +639,6 @@ table {
     margin-top: 0;
 }
 
-/* Prevents wide tables breaking the page layout */
-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-}
-
 /* Improves layout on smaller screens */
 @media (max-width: 700px) {
     .container {
@@ -542,7 +674,6 @@ table {
 
     background: none;
     border: none;
-    color: white;
 
     padding: 8px 10px;
     border-radius: 6px;
@@ -559,4 +690,227 @@ table {
 /* Hover effect matches navbar links */
 .logout-button:hover {
     background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Form container */
+form {
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.06);
+    margin-bottom: 25px;
+}
+
+/* Makes form labels clearer */
+form label {
+    font-weight: 700;
+    color: #4b2e24;
+}
+
+/* input styling */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 6px;
+    border: 1px solid #d8d1ca;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-family: inherit;
+    background: white;
+}
+
+/* Focus state for inputs */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #6b4a3a;
+    box-shadow: 0 0 0 3px rgba(107, 74, 58, 0.15);
+}
+
+/* Textarea resize behaviour */
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* Submit buttons */
+form button,
+button {
+    background: #5c4033;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: inherit;
+    transition: 0.2s ease;
+}
+
+/* Button hover */
+form button:hover,
+button:hover {
+    background: #7a5643;
+    transform: translateY(-1px);
+}
+
+/* Form paragraph spacing from Django form.as_p */
+form p {
+    margin-bottom: 18px;
+}
+
+.auth-switch {
+    margin-top: 18px;
+    font-size: 15px;
+}
+
+.auth-switch a {
+    color: #6b4a3a;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* Modern table container */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-wrapper th {
+    background: #5c4033;
+    color: white;
+    text-align: left;
+    padding: 14px;
+}
+
+.table-wrapper td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.table-wrapper tr:nth-child(even) {
+    background: #faf7f4;
+}
+
+.table-wrapper tr:hover {
+    background: #f3ece7;
+}
+
+.logout-nav-button {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    padding: 10px 16px !important;
+    border-radius: 999px !important;
+
+    font-family: inherit !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+
+    cursor: pointer;
+}
+
+.logout-nav-button:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+/* Product card layout */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+/* Individual product card */
+.product-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+    transition: 0.25s ease;
+}
+
+/* Card hover effect */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+}
+
+/* Product image */
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder if no image exists */
+.product-placeholder {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f5f1;
+    color: #7a6a60;
+    font-weight: bold;
+}
+
+/* Card content */
+.product-card-content {
+    padding: 22px;
+}
+
+/* Product category label */
+.product-category {
+    color: #8b7355;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+/* Product title */
+.product-card-content h2 {
+    color: #4b2e24;
+    margin: 0 0 10px 0;
+}
+
+/* Description text */
+.product-description {
+    color: #555;
+    min-height: 48px;
+}
+
+/* Price styling */
+.product-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #5c4033;
+    margin: 18px 0;
 }

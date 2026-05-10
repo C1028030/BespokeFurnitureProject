@@ -2,9 +2,9 @@
 
 {% block content %}
 <h1>Furniture Products</h1>
-<p>Browse the available bespoke furniture items below.</p>
+<p>Browse available bespoke furniture products below.</p>
 
-<form method="GET">
+<form method="GET" class="filter-form">
     <p>
         <label for="search">Search by name:</label>
         <input type="text" name="search" id="search" value="{{ search_query }}">
@@ -15,7 +15,9 @@
         <select name="category" id="category">
             <option value="">All Categories</option>
             {% for cat in categories %}
-                <option value="{{ cat }}" {% if cat == selected_category %}selected{% endif %}>{{ cat }}</option>
+                <option value="{{ cat }}" {% if cat == selected_category %}selected{% endif %}>
+                    {{ cat }}
+                </option>
             {% endfor %}
         </select>
     </p>
@@ -25,7 +27,9 @@
         <select name="material" id="material">
             <option value="">All Materials</option>
             {% for mat in materials %}
-                <option value="{{ mat }}" {% if mat == selected_material %}selected{% endif %}>{{ mat }}</option>
+                <option value="{{ mat }}" {% if mat == selected_material %}selected{% endif %}>
+                    {{ mat }}
+                </option>
             {% endfor %}
         </select>
     </p>
@@ -34,40 +38,29 @@
 </form>
 
 {% if products %}
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Material</th>
-        <th>Price (£)</th>
-        <th>Description</th>
-        <th>Action</th>
-        <th>Image</th>
-    </tr>
+<div class="product-grid">
     {% for product in products %}
-    <tr>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.material }}</td>
-        <td>{{ product.price }}</td>
-        <td>{{ product.description }}</td>
+    <div class="product-card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <div class="product-placeholder">No Image</div>
+        {% endif %}
 
-        <!-- New button/link column -->
-         <td>
-            <a href="{% url 'product_detail' product.id %}">View Details</a>
-         </td>
+        <div class="product-card-content">
+            <p class="product-category">{{ product.category }}</p>
+            <h2>{{ product.name }}</h2>
+            <p><strong>Material:</strong> {{ product.material }}</p>
+            <p class="product-description">{{ product.description }}</p>
+            <p class="product-price">£{{ product.price }}</p>
 
-         <!-- Image -->
-          <td>
-            {% if product.image %}
-                <img src="{{ product.image.url }}" width="100">
-            {% else %}
-                No image
-            {% endif %}
-          </td>
-    </tr>
+            <a class="button-link" href="{% url 'product_detail' product.id %}">
+                View Details
+            </a>
+        </div>
+    </div>
     {% endfor %}
-</table>
+</div>
 {% else %}
 <p>No furniture products match your search or filters.</p>
 {% endif %}

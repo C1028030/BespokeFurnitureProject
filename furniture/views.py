@@ -252,6 +252,7 @@ def order_success(request, order_id):
     # Sends order to template so we can display ID and details
     return render(request, 'furniture/order_success.html', {'order': order})
 
+@login_required
 def track_order(request):
     order = None
     orders = None

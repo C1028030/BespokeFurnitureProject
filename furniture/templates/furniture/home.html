@@ -2,14 +2,20 @@
 
 {% block content %}
 <section class="hero">
-    <h1>Custom Furniture Made for Your Space</h1>
-    <p>
-        Design bespoke furniture tailored to your room, style, material choice, and measurements.
-    </p>
+    <div class="hero-content">
+        <p class="eyebrow">Bespoke Furniture Management System</p>
 
-    <div class="hero-buttons">
-        <a class="button-link" href="/create/">Create Custom Order</a>
-        <a class="button-link secondary" href="/products/">View Products</a>
+        <h1>Custom furniture orders, tracking, and planning in one place.</h1>
+
+        <p class="hero-description">
+            Browse furniture products, create bespoke orders, upload design files,
+            and track order progress through a simple online system.
+        </p>
+
+        <div class="hero-actions">
+            <a class="button-link" href="{% url 'create' %}">Create Custom Order</a>
+            <a class="button-link secondary" href="{% url 'products' %}">View Products</a>
+        </div>
     </div>
 </section>
 
@@ -44,20 +50,27 @@
 
 <!-- Quick Actions -->
 <section class="quick-actions">
-    <h2>Quick Actions</h2>
+    <center><h2>Quick Actions</h2></center>
+    <br>
 
     <div class="action-grid">
-        <!-- Public/customer action -->
-        <a class="action-card" href="{% url 'create' %}">
-            <h3>Create Custom Order</h3>
-            <p>Submit a bespoke furniture request with dimensions and design files.</p>
-        </a>
-
         <!-- Public/customer action -->
         <a class="action-card" href="{% url 'track_order' %}">
             <h3>Track Order</h3>
             <p>Check the progress of an existing order using the reference number.</p>
         </a>
+
+        <a class="action-card" href="{% url 'products' %}">
+            <h3>Product Catalogue</h3>
+            <p>Browse available furniture products and filter them by category, material, or name.</p>
+        </a>
+
+        {% if user.is_authenticated %}
+        <a class="action-card" href="{% url 'profile' %}">
+            <h3>My Profile</h3>
+            <p>View your account details and previous furniture orders</p>
+        </a>
+        {% endif %}
 
         <!-- Staff-only action -->
         {% if user.is_staff %}
@@ -158,19 +171,26 @@
 {% endif %}
 
 <section class="features">
-    <div class="feature-card">
-        <h2>Custom Orders</h2>
-        <p>Customers can submit furniture requests with dimensions, material preferences, and requirements.</p>
-    </div>
+    <center><h2>System Features</h2></center>
+    <br>
 
-    <div class="feature-card">
-        <h2>Product Catalogue</h2>
-        <p>Browse available furniture products and filter them by category, material, or name.</p>
-    </div>
+    <div class="feature-grid">
 
-    <div class="feature-card">
-        <h2>Order Management</h2>
-        <p>Staff can view, edit, search, filter, and delete customer furniture requests.</p>
+        <div class="feature-card">
+            <h3>Custom Orders</h3>
+            <p>Customers can submit furniture requests with dimensions, material preferences, and requirements.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Product Catalogue</h3>
+            <p>Browse available furniture products and filter them by category, material, or name.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Order Management</h3>
+            <p>Staff can view, edit, search, filter, and delete customer furniture requests.</p>
+        </div>
+
     </div>
 </section>
 {% endblock %}

@@ -8,6 +8,7 @@
     <p>Your orders are shown below.</p>
 
     {% if orders %}
+    <div class="table-wrapper">
         <table>
             <tr>
                 <th>Order ID</th>
@@ -46,6 +47,7 @@
             </tr>
             {% endfor %}
         </table>
+    </div>
     {% else %}
         <p>No orders found for your account.</p>
     {% endif %}
