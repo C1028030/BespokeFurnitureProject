@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'furniture',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -130,3 +133,8 @@ LOGIN_URL = '/login/'
 
 # Where users go after logging in successfully
 LOGIN_REDIRECT_URL = '/profile/'
+
+# Allows React frontend to communicate with Django backend
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]

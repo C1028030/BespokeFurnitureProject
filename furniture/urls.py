@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views # Django built-in login/logout views
 
@@ -22,4 +22,5 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='furniture/login.html'), name='login'), # Customer login page
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'), # Customer logout page
     path('register/', views.register, name='register'), # Customer registration page
+    path('api/', include('furniture.api_urls')), # API routes for React frontend
 ]

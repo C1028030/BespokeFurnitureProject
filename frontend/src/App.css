@@ -1,0 +1,985 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f5f1;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    padding-top: 10px;
+}
+
+nav {
+    background-color: #5c4033;
+    padding: 15px 30px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-container h2 {
+    color: white;
+    margin: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 85%;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #5c4033;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+table th {
+    background-color: #5c4033;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+button {
+    background-color: #5c4033;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #7a5643;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+p {
+    line-height: 1.6;
+}
+
+td {
+    vertical-align: top;
+}
+
+h1 + p {
+    margin-bottom: 20px;
+}
+
+td a {
+    color: #5c4033;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+form {
+    margin-bottom: 25px;
+}
+
+form button {
+    margin-top: 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+select {
+    background-color: white;
+}
+
+/* Homepage Hero Section */
+.hero {
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+        linear-gradient(rgba(75, 46, 36, 0.72), rgba(75, 46, 36, 0.72)),
+        url("/media/products/Oak_Dining_Table.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 18px;
+    padding: 50px 25px;
+    margin-bottom: 35px;
+}
+
+/* Hero text wrapper */
+.hero-content {
+    max-width: 850px;
+    color: white;
+}
+
+/* Small label above hero title */
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+/* Main hero title */
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.1;
+    margin: 15px 0;
+    color: white;
+}
+
+/* Supporting hero text */
+.hero-description {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+    opacity: 0.95;
+}
+
+/* Hero button spacing */
+.hero-actions {
+    margin-top: 25px;
+}
+
+/* Makes secondary hero button stand out on image background */
+.hero-actions .secondary {
+    background-color: rgba(255, 2555, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.button-link {
+    display: inline-block;
+    background-color: #5c4033;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.button-link:hover {
+    background-color: #7a5643;
+}
+
+.button-link.secondary {
+    background-color: #8b7355;
+}
+
+/* Feature section spacing */
+.features {
+    margin-top: 45px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+}
+
+.feature-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+/* Shared badge styling */
+.status-badge {
+    padding: 6px 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Individual status colours */
+
+.status-pending {
+    background-color: #f39c12; /* orange */
+}
+
+.status-in-review {
+    background-color: #3498db; /* blue */
+}
+
+.status-approved {
+    background-color: #8e44ad; /* purple */
+}
+
+.status-in-production {
+    background-color: #795548; /* brown */
+}
+
+.status-ready {
+    background-color: #27ae60; /* green */
+}
+
+.status-completed {
+    background-color: #34e67e; /* bright green */
+}
+
+/* Dashboard stats layout */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin: 30px 0;
+}
+
+/* Individual dashboard stat card */
+.stat-card {
+    background-color: #f8f5f1;
+    border-radius: 10px;
+    padding: 22px;
+    text-align: center;
+    border-top: 5px solid #5c4033;
+}
+
+/* Large number inside each card */
+.stat-card h2 {
+    font-size: 34px;
+    color: #5c4033;
+    margin: 0;
+}
+
+/* Label under each number */
+.stat-card p {
+    margin: 8px 0 0 0;
+    font-weight: bold;
+}
+
+/* Red button style for delete actions */
+.button-link.danger {
+    background-color: #c0392b;
+}
+
+.button-link.danger:hover {
+    background-color: #e74c3c;
+}
+
+/* Makes dashboard cards behave like clean clickable buttons */
+.stat-card {
+    text-decoration: none;
+    color: inherit;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    transition: 0.2s ease;
+}
+
+/* Main timeline wrapper */
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 35px 0;
+    position: relative;
+}
+
+/* Grey line running behind all timeline circles */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 19px;
+    left: 8%;
+    right: 8%;
+    height: 4px;
+    background-color: #d6d1cc;
+    z-index: 0;
+}
+
+/* Each individual timeline step */
+.timeline-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Numbered circle */
+.timeline-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #d6d1cc;
+    color: #555;
+    margin: 0 auto 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border: 4px solid white;
+}
+
+/* Completed circle */
+.timeline-step.completed .timeline-circle {
+    background-color: #27ae60;
+    color: white;
+}
+
+/* Current active circle */
+.timeline-step.active .timeline-circle {
+    background-color: #5c4033;
+    color: white;
+    transform: scale(1.15);
+}
+
+/* Upcoming circle */
+.timeline-step.upcoming .timeline-circle {
+    background-color: #d6d1cc;
+    color: #777;
+}
+
+/* Timeline labels */
+.timeline-step p {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    color: #555;
+}
+
+/* Completed label */
+.timeline-step.completed p {
+    color: #27ae60;
+}
+
+/* Active label */
+.timeline-step.active p {
+    color: #5c4033;
+}
+
+/* Smooth animation for circle changes */
+.timeline-circle {
+    transition: all 0.25s ease;
+}
+
+/* Analytics chart container */
+.analytics-section {
+    margin: 35px 0;
+    padding: 25px;
+    background-color: #f8f5f1;
+    border-radius: 10px;
+}
+
+/* Keeps the chart at a sensible size */
+.analytics-section canvas {
+    max-height: 350px;
+}
+
+/* Shared priority badge style */
+.priority-badge {
+    padding: 6px 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Priority colours */
+.priority-low {
+    background-color: #7f8c8d;
+}
+
+.priority-normal {
+    background-color: #3498db;
+}
+
+.priority-high {
+    background-color: #e67e22;
+}
+
+.priority-urgent {
+    background-color: #c0392b;
+}
+
+/* Highlights urgent orders in the staff order table */
+.urgent-row {
+    background-color: #fdecea !important;
+    border-left: 5px solid #c0392b;
+}
+
+/* Makes urgent rows slightly stronger when hovered */
+.urgent-row:hover {
+    background-color: #f9d6d2 !important;
+}
+
+/* Profile info card */
+.profile-card {
+    background-color: #f8f5f1;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #5c4033;
+    margin-bottom: 25px;
+}
+
+/* Modern floating navbar */
+.site-navbar {
+    position: sticky;
+    top: 12px;
+    width: 94%;
+    margin: 0 auto;
+    background: rgba(75, 46, 36, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 16px 28px;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    z-index: 1000;
+}
+
+/* Navbar layout */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+/* Brand logo */
+.brand-logo {
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    transition: 0.25s ease;
+}
+
+/* Slight hover animation */
+.brand-logo:hover {
+    opacity: 0.88;
+}
+
+/* Navigation links container */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Navbar links/buttons */
+.nav-links a,
+.nav-button {
+    color: rgba(255,255,255,0.92);
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition:
+        background 0.25s ease,
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+/* Hover effect */
+.nav-links a:hover,
+.nav-button:hover {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Register button highlight */
+.nav-button.highlight {
+    background: white;
+    color: #4b2e24;
+}
+
+/* Register hover */
+.nav-button.highlight:hover {
+    background: #f4ece7;
+    color: #2d1a14;
+}
+
+/* Logout form reset */
+.logout-form {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Highlights login/logout links slightly */
+.nav-login,
+.nav-logout {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Prevent global button styles affecting navbar logout */
+.site-navbar .nav-button {
+    background: transparent;
+    color: rgba(255,255,255,0.92);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    font-family: inherit;
+}
+
+/* Navbar logout hover */
+.site-navbar .nav-button:hover {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Quick action dashboard section */
+.quick-actions {
+    margin: 35px 0;
+}
+
+.quick-actions h2 {
+    color: #5c4033;
+}
+
+/* Responsive card grid */
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+/* Dashboard action card */
+.action-card {
+    background-color: #f8f5f1;
+    border-radius: 10px;
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    border-left: 5px solid #5c4033;
+    transition: 0.2s ease;
+}
+
+/* Hover effect to make cards feel clickable */
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Card heading */
+.action-card h3 {
+    color: #5c4033;
+    margin-top: 0;
+}
+
+/* Improves layout on smaller screens */
+@media (max-width: 700px) {
+    .container {
+        width: 92%;
+        padding: 18px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Makes logout form look like the navbar links */
+.logout-form {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+/* Makes logout button align perfectly with links */
+.logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: none;
+    border: none;
+
+    padding: 8px 10px;
+    border-radius: 6px;
+
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Hover effect matches navbar links */
+.logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Form container */
+form {
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.06);
+    margin-bottom: 25px;
+}
+
+/* Makes form labels clearer */
+form label {
+    font-weight: 700;
+    color: #4b2e24;
+}
+
+/* input styling */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 6px;
+    border: 1px solid #d8d1ca;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-family: inherit;
+    background: white;
+}
+
+/* Focus state for inputs */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #6b4a3a;
+    box-shadow: 0 0 0 3px rgba(107, 74, 58, 0.15);
+}
+
+/* Textarea resize behaviour */
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* Submit buttons */
+form button,
+button {
+    background: #5c4033;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: inherit;
+    transition: 0.2s ease;
+}
+
+/* Button hover */
+form button:hover,
+button:hover {
+    background: #7a5643;
+    transform: translateY(-1px);
+}
+
+/* Form paragraph spacing from Django form.as_p */
+form p {
+    margin-bottom: 18px;
+}
+
+.auth-switch {
+    margin-top: 18px;
+    font-size: 15px;
+}
+
+.auth-switch a {
+    color: #6b4a3a;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* Modern table container */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-wrapper th {
+    background: #5c4033;
+    color: white;
+    text-align: left;
+    padding: 14px;
+}
+
+.table-wrapper td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.table-wrapper tr:nth-child(even) {
+    background: #faf7f4;
+}
+
+.table-wrapper tr:hover {
+    background: #f3ece7;
+}
+
+.logout-nav-button {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    padding: 10px 16px !important;
+    border-radius: 999px !important;
+
+    font-family: inherit !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+
+    cursor: pointer;
+}
+
+.logout-nav-button:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+/* Product card layout */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+/* Individual product card */
+.product-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+    transition: 0.25s ease;
+}
+
+/* Card hover effect */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+}
+
+/* Product image */
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder if no image exists */
+.product-placeholder {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f5f1;
+    color: #7a6a60;
+    font-weight: bold;
+}
+
+/* Card content */
+.product-card-content {
+    padding: 22px;
+}
+
+/* Product category label */
+.product-category {
+    color: #8b7355;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+/* Product title */
+.product-card-content h2 {
+    color: #4b2e24;
+    margin: 0 0 10px 0;
+}
+
+/* Description text */
+.product-description {
+    color: #555;
+    min-height: 48px;
+}
+
+/* Price styling */
+.product-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #5c4033;
+    margin: 18px 0;
+}
+
+select option {
+  color: black;
+  background: white;
+}
+
+/* Final fix for React homepage hero title */
+.modern-hero .hero-content h1 {
+    font-size: 48px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.5px;
+    max-width: 900px;
+    margin: 16px auto 20px auto !important;
+    text-align: center;
+    white-space: normal !important;
+}
+
+/* Product detail page layout */
+.product-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    align-items: center;
+}
+
+/* Large product image on detail page */
+.product-detail-image {
+    width: 100%;
+    max-height: 430px;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+/* Product detail text content */
+.product-detail-content {
+    background: #f8f5f1;
+    padding: 30px;
+    border-radius: 18px;
+    border-left: 5px solid #5c4033;
+}
+
+/* Mobile layout */
+@media (max-width: 800px) {
+    .product-detail-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.product-detail-content h1 {
+    font-size: 42px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.5px;
+    margin: 12px 0 20px 0 !important;
+    white-space: normal !important;
+}
+
+/* Fix input text colour */
+input,
+textarea,
+select {
+    color: #333;
+}
+
+/* Fix placeholder colour */
+input::placeholder,
+textarea::placeholder {
+    color: #777;
+}
