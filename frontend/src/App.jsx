@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import CreateOrder from "./pages/CreateOrder";
+import TrackOrder from "./pages/TrackOrder";
 
 import "./App.css";
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/create" element={<CreateOrder />} />
+        <Route path="/track-order" element={<TrackOrder />} />
       </Routes>
     </BrowserRouter>
   );

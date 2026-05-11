@@ -1,37 +1,35 @@
 import { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-function Profile() {
-  // Gets user from localStorage
+function TrackOrder() {
+  // Gets logged-in user details from localStorage
   const storedUser = localStorage.getItem("user");
-
-  // Converts stored user safely
   const user = storedUser ? JSON.parse(storedUser) : null;
 
-  // Stores matching orders
+  // Stores all orders linked to the logged-in user
   const [orders, setOrders] = useState([]);
 
-  // Tracks loading state
+  // Stores loading state while fetching data
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Stop if no user is logged in
+    // If user is not logged in, do not fetch orders
     if (!user) {
       setLoading(false);
       return;
     }
 
-    // Gets all orders from Django API
+    // Gets orders from Django API
     fetch("http://127.0.0.1:8000/api/orders/")
       .then((response) => response.json())
       .then((data) => {
-        // Keeps orders matching logged-in user's email
-        const userOrders = data.filter(
+        // Only show orders matching the logged-in user's email
+        const matchingOrders = data.filter(
           (order) =>
             order.email.toLowerCase() === user.email.toLowerCase()
         );
 
-        setOrders(userOrders);
+        setOrders(matchingOrders);
         setLoading(false);
       })
       .catch((error) => {
@@ -40,25 +38,15 @@ function Profile() {
       });
   }, []);
 
-  // Redirect if no user is logged in
+  // Redirect guests to login
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
   return (
     <main className="container">
-      <h1>My Profile</h1>
-
-      <div className="profile-card">
-        <p><strong>Username:</strong> {user.username}</p>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p>
-          <strong>Account Type:</strong>{" "}
-          {user.is_staff ? "Staff/Admin" : "Customer"}
-        </p>
-      </div>
-
-      <h2>My Order History</h2>
+      <h1>Track Orders</h1>
+      <p>Your submitted furniture orders are shown below.</p>
 
       {loading ? (
         <p>Loading orders...</p>
@@ -83,12 +71,18 @@ function Profile() {
                   <td>{order.furniture_type}</td>
                   <td>{order.material}</td>
                   <td>
-                    <span className={`status-badge status-${order.status.toLowerCase().replaceAll(" ", "-")}`}>
+                    <span
+                      className={`status-badge status-${order.status
+                        .toLowerCase()
+                        .replaceAll(" ", "-")}`}
+                    >
                       {order.status}
                     </span>
                   </td>
                   <td>
-                    <span className={`priority-badge priority-${order.priority.toLowerCase()}`}>
+                    <span
+                      className={`priority-badge priority-${order.priority.toLowerCase()}`}
+                    >
                       {order.priority}
                     </span>
                   </td>
@@ -99,14 +93,10 @@ function Profile() {
           </table>
         </div>
       ) : (
-        <p>No orders found for your account email.</p>
+        <p>No orders found for your account.</p>
       )}
-
-      <Link className="button-link" to="/products">
-        Browse Products
-      </Link>
     </main>
   );
 }
 
-export default Profile;
+export default TrackOrder;
