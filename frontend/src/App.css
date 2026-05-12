@@ -7,6 +7,54 @@ body {
     padding-top: 10px;
 }
 
+/* Global page spacing */
+main.container {
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+/* Global heading spacing */
+h1 {
+    margin-bottom: 24px;
+    line-height: 1.15;
+}
+
+h2 {
+    margin-top: 35px;
+    margin-bottom: 24px;
+
+    color: #5c4033;
+
+    line-height: 1.2;
+}
+
+/* Paragraph spacing */
+p {
+    line-height: 1.7;
+}
+
+/* Consistent spacing between sections */
+section {
+    margin-bottom: 50px;
+}
+
+/* Consistent button spacing */
+.hero-actions,
+.action-grid,
+.feature-grid {
+    margin-top: 25px;
+}
+
+/* Form spacing */
+form {
+    margin-top: 25px;
+}
+
+/* Table spacing */
+.table-wrapper {
+    margin-top: 25px;
+}
+
 nav {
     background-color: #5c4033;
     padding: 15px 30px;
@@ -35,7 +83,8 @@ nav {
 }
 
 .container {
-    width: 85%;
+    width: 96%;
+    max-width: none;
     margin: 30px auto;
     background: white;
     padding: 25px;
@@ -925,7 +974,7 @@ select option {
     font-size: 48px !important;
     line-height: 1.15 !important;
     letter-spacing: -0.5px;
-    max-width: 900px;
+    width: 100%;
     margin: 16px auto 20px auto !important;
     text-align: center;
     white-space: normal !important;
@@ -982,4 +1031,173 @@ select {
 input::placeholder,
 textarea::placeholder {
     color: #777;
+}
+
+/* Main timeline wrapper */
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 35px 0;
+    position: relative;
+}
+
+/* Grey line running behind all timeline circles */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 19px;
+    left: 8%;
+    right: 8%;
+    height: 4px;
+    background-color: #d6d1cc;
+    z-index: 0;
+}
+
+/* Each individual timeline step */
+.timeline-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Numbered circle */
+.timeline-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #d6d1cc;
+    color: #555;
+    margin: 0 auto 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border: 4px solid white;
+}
+
+/* Completed circle */
+.timeline-step.completed .timeline-circle {
+    background-color: #27ae60;
+    color: white;
+}
+
+/* Current active circle */
+.timeline-step.active .timeline-circle {
+    background-color: #5c4033;
+    color: white;
+    transform: scale(1.15);
+}
+
+/* Upcoming circle */
+.timeline-step.upcoming .timeline-circle {
+    background-color: #d6d1cc;
+    color: #777;
+}
+
+/* Timeline labels */
+.timeline-step p {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    color: #555;
+}
+
+/* Completed label */
+.timeline-step.completed p {
+    color: #27ae60;
+}
+
+/* Active label */
+.timeline-step.active p {
+    color: #5c4033;
+}
+
+/* Smooth animation for circle changes */
+.timeline-circle {
+    transition: all 0.25s ease;
+}
+
+/* Red button for delete actions */
+.button-link.danger {
+    background-color: #c0392b;
+}
+
+.button-link.danger:hover {
+    background-color: #e74c3c;
+}
+
+/* Make React layout use the full browser width */
+#root {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove Vite/default centering */
+body {
+    margin: 0;
+    width: 100%;
+}
+
+/* Wider page container */
+.container {
+    width: 96vw !important;
+    max-width: none !important;
+    margin: 30px auto !important;
+    padding: 28px !important;
+}
+
+/* Centres homepage hero content */
+.modern-hero {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    min-height: 500px;
+
+    background:
+        linear-gradient(rgba(75, 46, 36, 0.55), rgba(75, 46, 36, 0.55)),
+        url("http://127.0.0.1:8000/media/products/Oak_Dining_Table.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-radius: 18px;
+}
+
+.modern-hero h1 {
+    color: white !important;
+}
+
+/* Keeps hero content centred */
+.hero-content {
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+/* Centres hero buttons */
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+/* Fix System Features heading visibility */
+.feature-section h2 {
+    color: #5c4033 !important;
+    opacity: 1 !important;
+}
+
+.profile-page h2,
+.profile-page h1 {
+    color: #5c4033 !important;
+    opacity: 1 !important;
 }

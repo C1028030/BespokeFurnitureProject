@@ -46,7 +46,7 @@ function Profile() {
   }
 
   return (
-    <main className="container">
+    <main className="container profile-page">
       <h1>My Profile</h1>
 
       <div className="profile-card">

@@ -14,4 +14,10 @@ urlpatterns = [
 
     # Login page
     path('login/', api_views.login_api, name='api_login'),
+
+    # Order detail API route
+    path('orders/<int:order_id>/', api_views.order_detail_api, name='api_order_detail'),
+
+    # Dashboard
+    path('analytics/', api_views.analytics_api, name='api_analytics'),
 ]

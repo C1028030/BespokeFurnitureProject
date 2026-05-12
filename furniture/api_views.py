@@ -7,6 +7,7 @@ from .serializers import FurnitureSerializer, CustomOrderSerializer
 from django.contrib.auth.models import User
 from rest_framework import status
 from django.contrib.auth import authenticate
+from django.db.models import Count
 
 
 @api_view(['GET'])
@@ -98,3 +99,69 @@ def login_api(request):
         {'error': 'Invalid username or password'},
         status=status.HTTP_400_BAD_REQUEST
     )
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def order_detail_api(request, order_id):
+    # Gets the selected order
+    try:
+        order = CustomOrder.objects.get(id=order_id)
+    except CustomOrder.DoesNotExist:
+        return Response({'error': 'Order not found'}, status=404)
+
+    # GET returns one order
+    if request.method == 'GET':
+        serializer = CustomOrderSerializer(order)
+        return Response(serializer.data)
+
+    # PUT updates the order
+    if request.method == 'PUT':
+        serializer = CustomOrderSerializer(order, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors, status=400)
+    
+    # DELETE removes the selected order
+    if request.method == 'DELETE':
+        order.delete()
+        return Response({'message': 'Order deleted successfully'})
+    
+@api_view(['GET'])
+def analytics_api(request):
+    # Basic dashboard totals
+    total_orders = CustomOrder.objects.count()
+    pending_orders = CustomOrder.objects.filter(status='Pending').count()
+    completed_orders = CustomOrder.objects.filter(status='Completed').count()
+    total_products = Furniture.objects.count()
+
+    # Orders grouped by status
+    status_data = (
+        CustomOrder.objects
+        .values('status')
+        .annotate(count=Count('id'))
+        .order_by('status')
+    )
+
+    # Orders grouped by date
+    orders_by_day = (
+        CustomOrder.objects
+        .extra(select={'day': "date(created_at)"})
+        .values('day')
+        .annotate(count=Count('id'))
+        .order_by('day')
+    )
+
+    return Response({
+        'total_orders': total_orders,
+        'pending_orders': pending_orders,
+        'completed_orders': completed_orders,
+        'total_products': total_products,
+
+        'status_labels': [item['status'] for item in status_data],
+        'status_counts': [item['count'] for item in status_data],
+
+        'daily_order_labels': [str(item['day']) for item in orders_by_day],
+        'daily_order_counts': [item['count'] for item in orders_by_day],
+    })

@@ -10,6 +10,13 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import CreateOrder from "./pages/CreateOrder";
 import TrackOrder from "./pages/TrackOrder";
+import Orders from "./pages/Orders";
+import OrderDetail from "./pages/OrderDetail";
+import EditOrder from "./pages/EditOrder";
+import Dashboard from "./pages/Dashboard";
+import Manufacturing from "./pages/Manufacturing";
+import DeliveryPlanning from "./pages/DeliveryPlanning";
+import CustomerHistory from "./pages/CustomerHistory";
 
 import "./App.css";
 
@@ -35,6 +42,13 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/create" element={<CreateOrder />} />
         <Route path="/track-order" element={<TrackOrder />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/orders/:orderId" element={<OrderDetail />} />
+        <Route path="/orders/:orderId/edit" element={<EditOrder />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/manufacturing" element={<Manufacturing />} />
+        <Route path="/delivery" element={<DeliveryPlanning />} />
+        <Route path="/customer-history" element={<CustomerHistory />} />
       </Routes>
     </BrowserRouter>
   );

@@ -2,15 +2,15 @@
 
 ## Project Overview
 
-This project is a web-based management system created for a fictional company called Bespoke Furniture Creations. The system was designed to help the company manage customer orders, manufacturing tasks, deliveries, and customer accounts more efficiently.
+This project is a web-based management system created for a fictional company called Bespoke Furniture Creations. The system was designed to help the company manage customer orders, manufacturing tasks, deliveries, analytics, and customer accounts more efficiently.
 
-Before this project, the company relied mostly on spreadsheets and manual organisation to manage bespoke furniture orders. Customer information, manufacturing schedules, and delivery planning were all handled separately, which made the workflow harder to manage as more orders were added.
+Before this project was developed, the company relied heavily on spreadsheets and manual organisation to manage bespoke furniture orders. Customer information, manufacturing schedules, and delivery planning were handled separately, making the workflow inefficient and difficult to manage as order volumes increased.
 
-The aim of this project was to create one central system that could handle these tasks in a more organised way. Customers are able to browse products, place bespoke furniture orders, upload design files, create accounts, track their orders, and view their order history.
+The aim of this project was to create one centralised system that could handle these tasks in a more organised way. Customers are able to browse products, place bespoke furniture orders, upload design files, register accounts, track orders, and view their order history.
 
-The system also includes features for staff and admin users. Staff members are able to manage orders, update order statuses, prioritise urgent orders, view analytics, manage manufacturing lists, and organise deliveries.
+The system also includes features for staff and admin users. Staff members are able to manage orders, update statuses, prioritise urgent orders, view analytics, manage manufacturing lists, organise deliveries, and export operational data.
 
-The project was developed using Django and SQLite. Other libraries such as Pillow and ReportLab were also used for image uploads and PDF exports.
+The project uses a React frontend connected to a Django REST API backend with SQLite as the database solution.
 
 ---
 
@@ -32,7 +32,7 @@ The project was developed using Django and SQLite. Other libraries such as Pillo
 - Manage customer orders
 - Update order statuses
 - Prioritise urgent orders
-- Access analytics charts
+- Access analytics dashboards
 - View manufacturing lists
 - Plan deliveries
 - Export order data to CSV
@@ -44,9 +44,10 @@ The project was developed using Django and SQLite. Other libraries such as Pillo
 
 | Technology | Purpose |
 |---|---|
-| Django | Backend framework |
+| React | Frontend user interface |
+| Django REST Framework | Backend API |
 | SQLite | Database |
-| HTML/CSS | Frontend design |
+| HTML/CSS | Styling and layout |
 | Chart.js | Analytics charts |
 | Pillow | Image uploads |
 | ReportLab | PDF exports |
@@ -55,13 +56,26 @@ The project was developed using Django and SQLite. Other libraries such as Pillo
 
 # System Structure
 
-The project follows Django’s Model-View-Template (MVT) structure.
+The project uses a React frontend connected to a Django REST API backend.
 
-- Models store database information.
-- Views handle requests and application logic.
-- Templates display information to users.
+## React Frontend
+The React frontend handles:
+- page routing
+- user interface
+- forms
+- customer/staff views
+- analytics dashboards
 
-Django’s authentication system was also used to separate customer and staff/admin functionality.
+## Django Backend
+The Django backend handles:
+- database models
+- API endpoints
+- authentication
+- file uploads
+- PDF/CSV exports
+- admin panel functionality
+
+The project also uses Django’s authentication system to separate customer and staff/admin functionality.
 
 ---
 
@@ -71,13 +85,15 @@ Django’s authentication system was also used to separate customer and staff/ad
 
 Download or extract the project folder.
 
-Open the project folder inside Visual Studio Code or another Python IDE.
+Open the project folder in Visual Studio Code or another IDE.
 
 ---
 
+# Backend Setup (Django)
+
 ## 2. Create a Virtual Environment
 
-Open a terminal inside the project folder and run:
+Open a terminal inside the backend project folder and run:
 
 ```bash
 python -m venv venv
@@ -95,15 +111,20 @@ venv\Scripts\activate
 
 ---
 
-## 4. Install Required Packages
+## 4. Install Python Dependencies
 
-Install the required packages using:
+Install required backend packages:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-This will install all libraries needed for the project, including Django, Pillow, and ReportLab.
+This installs:
+- Django
+- Django REST Framework
+- Pillow
+- ReportLab
+- other required dependencies
 
 ---
 
@@ -116,16 +137,50 @@ python manage.py migrate
 
 ---
 
-## 6. Run the Server
+## 6. Start Django Backend Server
 
 ```bash
 python manage.py runserver
 ```
 
-Open the website in a browser:
+Backend runs at:
 
 ```text
 http://127.0.0.1:8000/
+```
+
+---
+
+# Frontend Setup (React)
+
+## 7. Open React Frontend Folder
+
+Open a second terminal and move into the frontend folder:
+
+```bash
+cd frontend
+```
+
+---
+
+## 8. Install React Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## 9. Start React Frontend
+
+```bash
+npm run dev
+```
+
+Frontend runs at:
+
+```text
+http://localhost:5173/
 ```
 
 ---
@@ -150,11 +205,8 @@ http://127.0.0.1:8000/admin/
 
 | Page | URL |
 |---|---|
-| Homepage | http://127.0.0.1:8000/ |
-| Products | http://127.0.0.1:8000/products/ |
-| Create Order | http://127.0.0.1:8000/create/ |
-| Register | http://127.0.0.1:8000/register/ |
-| Login | http://127.0.0.1:8000/login/ |
+| React Frontend | http://localhost:5173/ |
+| Django Backend API | http://127.0.0.1:8000/ |
 | Admin Panel | http://127.0.0.1:8000/admin/ |
 
 ---
@@ -173,10 +225,10 @@ Customers can:
 
 ## Staff/Admin Users
 
-Staff and admin users can also:
+Staff and admin users can additionally:
 - manage customer orders
 - update statuses and priorities
-- access analytics charts
+- access analytics dashboards
 - manage manufacturing workflows
 - organise deliveries
 - export CSV and PDF reports
@@ -235,31 +287,3 @@ The system supports:
 Uploaded files are stored inside the `/media/` directory.
 
 ---
-
-# Challenges Faced During Development
-
-One challenge during development was separating customer and staff functionality while keeping the interface simple and easy to use. This was solved using Django’s authentication system and conditional rendering inside templates.
-
-Another challenge was handling image and file uploads correctly. This required configuring Django media settings and integrating the Pillow library.
-
-Creating the analytics dashboard and export features also required additional testing and research, especially when integrating Chart.js and PDF generation into Django.
-
----
-
-# Future Improvements
-
-Possible future improvements include:
-- route optimisation using maps APIs
-- automated email notifications
-- live delivery tracking
-- mobile app support
-- predictive delivery batching
-- real-time dashboard updates
-
----
-
-# Conclusion
-
-Overall, the project successfully meets the main objectives outlined in the brief. The system improves how bespoke furniture orders are managed by replacing manual spreadsheet-based workflows with a centralised web application.
-
-The project demonstrates the use of Django features such as authentication, database management, file uploads, analytics, exports, and role-based functionality. It also provides a strong base that could be expanded further in the future.

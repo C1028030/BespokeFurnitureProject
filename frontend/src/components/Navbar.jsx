@@ -33,6 +33,8 @@ function Navbar({ user, setUser }) {
                   <Link to="/orders">Orders</Link>
                   <Link to="/manufacturing">Manufacturing</Link>
                   <Link to="/delivery">Delivery</Link>
+                  <Link to="/dashboard">Dashboard</Link>
+                  <Link to="/customer-history">Customer History</Link>
                 </>
               )}
 
