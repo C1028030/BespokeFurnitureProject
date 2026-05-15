@@ -6,7 +6,7 @@ function Home() {
       {/* Main homepage hero section */}
       <section className="modern-hero">
         <div className="hero-content">
-          <p className="eyebrow">Bespoke Furniture Management System</p>
+          <p className="eyebrow">Bespoke Furniture</p>
 
           <h1>Custom furniture orders, tracking, and planning in one place.</h1>
 
